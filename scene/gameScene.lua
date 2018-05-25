@@ -92,7 +92,7 @@ function scene:show( event )
 
         local filename = "assets/maps/level0.json" 
         local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
-        map = tiled.new( mapData, "assets/maps" )
+        local map = tiled.new( mapData, "assets/maps" )
 
         sceneGroup:insert( map )
         sceneGroup:insert( Knight )
