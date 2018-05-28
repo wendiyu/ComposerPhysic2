@@ -36,26 +36,14 @@ function scene:create( event )
     physics.start()
     physics.setGravity(0, 32)
     --physics.setDrawMode("hybrid")
- 
-end
- 
- 
--- show()
-function scene:show( event )
- 
-    local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
+    -- get character
+    local sheetOptionsIdle = require("assets.spritesheets.knight.knightIdle")
+    local sheetIdleKnight = graphics.newImageSheet("./assets/spritesheets/knight/knightIdle.png", sheetOptionsIdle:getSheet() )
 
-        -- get character
-        local sheetOptionsIdle = require("assets.spritesheets.knight.knightIdle")
-        local sheetIdleKnight = graphics.newImageSheet("./assets/spritesheets/knight/knightIdle.png", sheetOptionsIdle:getSheet() )
+    local sheetOptionsRun = require("assets.spritesheets.knight.knightRun")
+    local sheetRunningKnight = graphics.newImageSheet("./assets/spritesheets/knight/knightRun.png", sheetOptionsRun:getSheet() )
 
-        local sheetOptionsRun = require("assets.spritesheets.knight.knightRun")
-        local sheetRunningKnight = graphics.newImageSheet("./assets/spritesheets/knight/knightRun.png", sheetOptionsRun:getSheet() )
-
-        local sequence_data_ninja = {
+    local sequence_data_ninja = {
     -- consecutive frames sequence
     {
         name = "idle",
@@ -71,11 +59,10 @@ function scene:show( event )
         count = 10,
         time = 800,
         loopCount = 0,
-        sheet = sheetRunnungKnight
+        sheet = sheetRunningKnight
     }             
 }
-
-        local Knight = display.newSprite( sheetIdleKnight, sequence_data_ninja )
+local Knight = display.newSprite( sheetIdleKnight, sequence_data_ninja )
         Knight.x = display.contentWidth * 0.5
         Knight.y = 0
         Knight.id = "the character"
@@ -96,6 +83,18 @@ function scene:show( event )
 
         sceneGroup:insert( map )
         sceneGroup:insert( Knight )
+
+ 
+end
+ 
+ 
+-- show()
+function scene:show( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
  
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
